@@ -30,7 +30,7 @@ grammar ScssGrammar {
     }
 
     token color_name {
-        "red" | "blue"
+        <.ident>+
     }
 
     token color_code {
