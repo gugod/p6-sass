@@ -1,18 +1,17 @@
 grammar ScssGrammar {
     rule TOP {
-        <cssrule>*
+        <scssrule>*
     }
 
-    rule cssrule {
-        <selector> '{' <property_list> '}'
+    rule scssrule {
+        <selector> '{'
+        ( <property_kv> | <scssrule> )* %% ';'
+        '}'
     }
+
 
     rule selector {
         (<tag_selector> (<id_selector> | <class_selector>)* | (<id_selector> | <class_selector>)+)+ %% ','
-    }
-
-    rule property_list {
-        <property_kv>* %% ';'
     }
 
     rule property_kv {
