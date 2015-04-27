@@ -26,11 +26,15 @@ grammar ScssGrammar {
     token property_value { <color> | <property_literals> | <number> <unit>? }
     
     token color {
-        <color_name>
+        <color_name> | <color_code>
     }
 
     token color_name {
         "red" | "blue"
+    }
+
+    token color_code {
+        "#" ( <hexdigit> ** 3 | <hexdigit> ** 6 )
     }
 
     token unit {
@@ -58,6 +62,8 @@ grammar ScssGrammar {
     token important_sym {:i '!'important }
 
     token number { <.digit>+ }
+
+    token hexdigit { <[0..9] + [a..f]> }
 
     token string      { ('"' | \') (<- nl>|\\ \n)*? $0 }
 
