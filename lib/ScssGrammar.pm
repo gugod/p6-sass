@@ -8,8 +8,7 @@ grammar ScssGrammar {
     }
 
     rule selector {
-        <tag_selector> (<id_selector> | <class_selector>)*
-        | (<id_selector> | <class_selector>)+
+        (<tag_selector> (<id_selector> | <class_selector>)* | (<id_selector> | <class_selector>)+)+ %% ','
     }
 
     rule property_list {
@@ -24,7 +23,7 @@ grammar ScssGrammar {
 
     token property_name { <cssident> }
 
-    token property_value { <color> | <number> <unit>? }
+    token property_value { <color> | <property_literals> | <number> <unit>? }
     
     token color {
         <color_name>
@@ -51,6 +50,10 @@ grammar ScssGrammar {
         '-'?<alpha>(<.ident> | '-')*
     }
 
+
+    token property_literals {
+        [ underline | large ]
+    }
 
     token important_sym {:i '!'important }
 
