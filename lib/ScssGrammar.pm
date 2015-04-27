@@ -1,6 +1,10 @@
 grammar ScssGrammar {
     rule TOP {
-        <scssrule>*
+        (<import_statement> | <scssrule>)*
+    }
+
+    rule import_statement {
+        "@import" <-[\n]>+ ";"
     }
 
     rule scssrule {
@@ -8,7 +12,6 @@ grammar ScssGrammar {
         ( <property_kv> | <scssrule> )* %% ';'
         '}'
     }
-
 
     rule selector {
         (<tag_selector> (<id_selector> | <class_selector>)* | (<id_selector> | <class_selector>)+)+ %% ','
