@@ -21,51 +21,18 @@ grammar ScssGrammar {
 
     token tag_selector { <.ident> }
 
-    token property_name { <cssident> }
-
-    token property_value { <color> | <property_literals> | <number> <unit>? }
-    
-    token color {
-        <color_name> | <color_code>
-    }
-
-    token color_name {
-        <.ident>+
-    }
-
-    token color_code {
-        "#" ( <hexdigit> ** 3 | <hexdigit> ** 6 )
-    }
-
-    token unit {
-        :i
-        [ px | cm | mm | in | pt | pc | em | ex | deg | rad | grad | ms | s | hz | khz ]
-    }
-
-    token id_selector {
-        "#" <cssident>
-    }
-
-    token class_selector {
-        "." <cssident>
-    }
-
-    token cssident {
+    token property_name {
         '-'?<alpha>(<.ident> | '-')*
     }
 
-
-    token property_literals {
-        [ underline | large ]
+    token property_value { <-[;]>+ }
+    
+    token id_selector {
+        "#" <.ident>+
     }
 
-    token important_sym {:i '!'important }
+    token class_selector {
+        "." <.ident>+
+    }
 
-    token number { <.digit>+ }
-
-    token hexdigit { <[0..9] + [a..f]> }
-
-    token string      { ('"' | \') (<- nl>|\\ \n)*? $0 }
-
-    token nl {\xA|"\r"\xA|"\r"|"\f"}
 }
