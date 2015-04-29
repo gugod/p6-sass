@@ -2,5 +2,7 @@
 
 use lib 'lib';
 
-use ScssGrammar;
-say ScssGrammar.parsefile(@*ARGS[0]).gist
+use Scss;
+
+Scss.new.convert( slurp @*ARGS[0] );
+
