@@ -4,5 +4,6 @@ use lib 'lib';
 
 use Scss;
 
-Scss.new.convert( slurp @*ARGS[0] );
+my $s = Scss.new.convert( slurp @*ARGS[0] );
+say $s.gist;
 
